@@ -1,1 +1,47 @@
+#include <stdio.h>
+#include <stdlib.h>
+int recur(char []);
+int main()
+{
+    char a[100];
+    printf("Enter A String: ");
+    gets(a);
+    recur(a);
+    return 0;
+}
+int recur(char a[])
+{
+    static int f = 0;
+    int i,n=0,j;
+    for(i = 0; a[i] != '\0'; i++)
+    {
+        n++;
+    }
+    if(f == 1)
+    {
+        puts(a);
+        return 0;
+    }
+    else
+    {
+        for(i = 0; a[i] != '\0'; i++)
+        {
+            if(a[i] == a[i + 1])
+            {
+                for(j = i; a[j] != '\0'; j++)
+                {
+                    a[j] = a[j + 2];
+                }
+                a[n - 2] = '\0';
+                break;
+            }
+            else if(a[i+1] == '\0')
+            {
+                f = 1;
+                break;
+            }
+        }
+        return recur(a);
+    }
+}
 
