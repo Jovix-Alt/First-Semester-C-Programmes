@@ -24,6 +24,7 @@ for(i=0;i<n;i++){
     scanf("%f" , &record[i].price);
     printf("\n\n");
 }
+while(f != 3){
 printf("Select Action: \n1 -> Search for a book\n2 -> Display the Menu\n3 -> Exit\n");
 scanf("%d" , &f);
 if(f==2){
@@ -41,8 +42,8 @@ for(i=0;i<n-1;i++){
        record[j] = temp;
     }}}
     search(record,n);
-}
-else if(f==3){
+}}
+if(f==3){
 return 0;
 }
 else{
@@ -80,4 +81,5 @@ if(f != 1){
     }
 
 }
+
 
