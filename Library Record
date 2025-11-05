@@ -1,1 +1,83 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+struct library {
+int ID;
+char title[50];
+char author[50];
+float price;
+};
+int search(struct library[], int);
+int main(){
+    int n,f,i,j;
+    printf("Enter No. Of Books: ");
+    scanf("%d" ,&n);
+struct library record[n],temp;
+for(i=0;i<n;i++){
+    printf("Enter ID of Book %d: ",i+1);
+    scanf("%d" , &record[i].ID);
+    printf("Enter Title of Book %d: ",i+1);
+    scanf(" %[^\n]" , record[i].title);
+    printf("Enter Author Of Book %d: ",i+1);
+    scanf(" %[^\n]" , record[i].author);
+    printf("Enter Price of Book %d: ",i+1);
+    scanf("%f" , &record[i].price);
+    printf("\n\n");
+}
+printf("Select Action: \n1 -> Search for a book\n2 -> Display the Menu\n3 -> Exit\n");
+scanf("%d" , &f);
+if(f==2){
+    printf("---------------------------Menu----------------------------\nID\t\tTitle\t\tAuthor\t\tPrice\n");
+    for(i = 0;i<n;i++){
+        printf("%d\t\t%s\t\t%s\t\t%.2f\n" ,record[i].ID, record[i].title, record[i].author,record[i].price  );
+    }
+}
+else if(f==1){
+for(i=0;i<n-1;i++){
+        for(j = i+1;j<n;j++){
+    if(strcmp(record[i].title,record[j].title) > 0){
+       temp = record[i];
+       record[i] = record[j];
+       record[j] = temp;
+    }}}
+    search(record,n);
+}
+else if(f==3){
+return 0;
+}
+else{
+    printf("Invalid Input\n");
+}
+return 0;
+}
+int search(struct library record[], int n){
+    int i,j;
+    static int f,low,high,mid;
+    static char a[50],temp[50];
+if(f != 1){
+    printf("Enter title of book to search: \n");
+    scanf(" %[^\n]" , a);
+    low = 0; high = n-1;
+}
+    f = 1;
+    if(f==1){
+            mid = (low + high)/2;
+            strcpy(temp,record[mid].title);
+        if(strcmp(a,temp) == 0){
+            printf("---------------------------Here are the details----------------------------\nID\t\tTitle\t\tAuthor\t\tPrice\n");
+            printf("%d\t\t%s\t\t%s\t\t%.2f\n" ,record[mid].ID, record[mid].title, record[mid].author, record[mid].price);
+            f = 2;
+            return 0;
+        }else{
+            if(strcmp(a,temp) > 0){
+                low = mid + 1;
+            }else if(strcmp(a,temp) < 0){
+            high = mid - 1;
+            }
+            return (search(record,n));
+        }
+
+    }
+
+}
 
