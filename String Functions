@@ -1,1 +1,59 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+void change(char a[]) {
+    char word[50], maxV[50] = "", maxC[50] = "", result[500] = "";
+    int i = 0, j = 0, vCount, cCount, maxv = 0, maxc = 0;
+
+    // --- First pass: find max vowel/consonant words ---
+    while (1) {
+        j = 0;
+        while (a[i] != ' ' && a[i] != '\0') {
+            word[j++] = a[i++];
+        }
+        word[j] = '\0';
+
+        vCount = cCount = 0;
+        for (int k = 0; word[k]; k++) {
+            if (strchr("AEIOUaeiou", word[k]))
+                vCount++;
+            else if (isalpha(word[k]))
+                cCount++;
+        }
+
+        if (vCount > maxv) { strcpy(maxV, word); maxv = vCount; }
+        if (cCount > maxc) { strcpy(maxC, word); maxc = cCount; }
+
+        if (a[i] == '\0') break;
+        i++;
+    }
+
+    // --- Second pass: build new string ---
+    i = 0;
+    while (1) {
+        j = 0;
+        while (a[i] != ' ' && a[i] != '\0')
+            word[j++] = a[i++];
+        word[j] = '\0';
+
+        if (strchr("AEIOUaeiou", word[0]))
+            strcat(result, maxV);
+        else
+            strcat(result, maxC);
+
+        if (a[i] == '\0') break;
+        strcat(result, " ");
+        i++;
+    }
+
+    printf("The modified sentence is:\n%s\n", result);
+}
+int main(){
+char a[100];
+printf("Enter a Sentence: \n");
+scanf("%[^\n]" , a);
+change(a);
+return 0;
+}
 
