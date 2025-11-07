@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <stdlib.h>
+void modify(int [][100],int,int);
+int generic(int);
+int main(){
+int n,m,i,j,a[100][100];
+printf("Enter No. of Rows In Matrix - ");
+scanf("%d" ,&m);
+printf("Enter No. of Columns In Matrix - ");
+scanf("%d" ,&n);
+printf("Enter Elements : \n");
+for(i=0;i<m;i++){
+    for(j=0;j<n;j++){
+        scanf("%d" , &a[i][j]);
+    }
+}
+printf("The Entered Matrix Is : \n");
+for(i=0;i<m;i++){
+    for(j=0;j<n;j++){
+       printf("%d\t" , a[i][j]);
+    }printf("\n");
+}
+modify(a,m,n);
+return 0;
+}
+void modify(int a[][100], int m, int n){
+int i,j,z,x,y,sum;
+for(i=0;i<m;i++){
+    for(j=0;j<n;j++){
+            if((i==0&&j==0)||(i==0&&j==n-1)||(i==m-1&&j==0)||(i==m-1&&j==n-1)){
+                z = generic(a[i][j]);
+                a[i][j] = z;
+            }else{
+            if(a[i][j]%2 == 0){
+                x = a[i][j];
+                sum = 0;
+                while(x != 0){
+                   y = x%10;
+                   sum = sum + y;
+                   x = x/10;
+                }
+                a[i][j] = a[i][j] + (2*sum);
+            }else{
+            a[i][j] = a[i][j];
+            }}
+    }}
+    printf("The Modified Array Is : \n");
+    for(i=0;i<m;i++){
+    for(j=0;j<n;j++){
+       printf("%d\t" , a[i][j]);
+    }printf("\n");
+}
+
+}
+int generic(int x){
+    int y,sum = 0,z = x;
+if(x<10){
+    return x;
+}else{
+while(z!=0){
+    y = z%10;
+    sum = sum + y;
+    z = z/10;
+}
+x = sum;
+return(generic(x));
+}
+}
